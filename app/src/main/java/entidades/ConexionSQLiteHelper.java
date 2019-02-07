@@ -8,20 +8,20 @@ import utilidades.Utilidades;
 
 public class ConexionSQLiteHelper extends SQLiteOpenHelper {
 
-
-
     public ConexionSQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Utilidades.CREAR_TABLAS_USUARIO);
+    public void onCreate(SQLiteDatabase baseDatos) {
+
+        baseDatos.execSQL("create table usuario(idUsuario int primary key, nombre text, contrasenia text)");
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS usuario");
-        onCreate(db);
+        //db.execSQL("DROP TABLE IF EXISTS usuario");
+        //onCreate(db);
     }
 }
