@@ -100,7 +100,7 @@ public class Juego extends AppCompatActivity {
                         imgAuxAct=b1.getBackground();
                         Toast.makeText(Juego.this, "ENTRO!", Toast.LENGTH_SHORT).show();
                         buttonActual = b1;
-                        b5.setBackgroundDrawable(imgAuxAct);
+                        //b5.setBackgroundDrawable(imgAuxAct);
                     }else{
 
                     }
@@ -110,7 +110,17 @@ public class Juego extends AppCompatActivity {
             b2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(buttonActual == null){
+                        imgAuxAct=b2.getBackground();
+                        Toast.makeText(Juego.this, "ENTRO!", Toast.LENGTH_SHORT).show();
+                        buttonActual = b2;
+                        //b5.setBackgroundDrawable(imgAuxAct);
+                    }else{
+                        imgAuxCam=b2.getBackground();
+                        b2.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                    }
                     checkGame();
 
                 }
