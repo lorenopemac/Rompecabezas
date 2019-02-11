@@ -1,5 +1,6 @@
 package labprog.rompecabezasandroid;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -55,6 +56,9 @@ public class Login extends AppCompatActivity {
         if(fila.moveToFirst()){
             Toast.makeText(this,"Correcto!", Toast.LENGTH_SHORT).show();
             db.close();
+            Intent toys;
+            toys = new Intent(Login.this , Juego.class);
+            startActivity(toys);
         }else{
             Toast.makeText(this,"Datos Incorrectos!", Toast.LENGTH_SHORT).show();
             db.close();
