@@ -11,6 +11,7 @@
         android:id="@+id/textView2"
         android:layout_width="316dp"
         android:layout_height="40dp"
+        android:background="@android:color/background_light"
         android:text="Bienvenido al Juego !!"
         android:textSize="30sp"
         app:autoSizeMaxTextSize="30dp"
@@ -23,7 +24,7 @@
     <Button
         android:id="@+id/button1"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="182dp"
+        android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -40,8 +41,8 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="174dp"
-        android:layout_height="62dp"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -51,9 +52,27 @@
         android:text="Registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.082" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Ranking"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.137" />
 
 </android.support.constraint.ConstraintLayout>

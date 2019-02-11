@@ -13,15 +13,15 @@ public class Juego extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
-        start();
+        inicio();
     }
 
 
         Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;
         int img1, img2, img3, img4, img5, img6, img7, img8, img9;
         Drawable imgAuxAct,imgAuxCam;
-        int turn;
-        public void checkGame(){
+        int turnos=0;
+        public void seGano(){
             checkWinner(b1,b2,b3);
             checkWinner(b4,b5,b6);
             checkWinner(b7,b8,b9);
@@ -43,7 +43,7 @@ public class Juego extends AppCompatActivity {
             }
         }
         public void reset(View view){
-            turn =1;
+            turnos =0;
             b1.setText("T");
             b2.setText("T");
             b4.setText("");
@@ -60,8 +60,9 @@ public class Juego extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             //setContentView(R.layout.startup);
         }*/
-        public void start(){
+        public void inicio(){
             setContentView(R.layout.activity_juego);
+            //RECUPERACION DE LOS BOTONES
             b1=(Button) findViewById(R.id.b1);
             b2=(Button) findViewById(R.id.b2);
             b3=(Button) findViewById(R.id.b3);
@@ -71,15 +72,17 @@ public class Juego extends AppCompatActivity {
             b7=(Button) findViewById(R.id.b7);
             b8=(Button) findViewById(R.id.b8);
             b9=(Button) findViewById(R.id.b9);
-            img1=R.drawable.pigeon_piece1;
-            img2=R.drawable.pigeon_piece2;
-            img3=R.drawable.pigeon_piece3;
-            img4=R.drawable.pigeon_piece4;
-            img5=R.drawable.pigeon_piece5;
-            img6=R.drawable.pigeon_piece6;
-            img7=R.drawable.pigeon_piece7;
-            img8=R.drawable.pigeon_piece8;
-            img9=R.drawable.pigeon_piece9;
+            //ESTABLECER IMAGENES
+            img1=R.drawable.marioparte1;
+            img2=R.drawable.marioparte2;
+            img3=R.drawable.marioparte3;
+            img4=R.drawable.marioparte4;
+            img5=R.drawable.marioparte5;
+            img6=R.drawable.marioparte6;
+            img7=R.drawable.marioparte7;
+            img8=R.drawable.marioparte8;
+            img9=R.drawable.marioparte9;
+            //LIGAR IMAGENES CON LOS BOTONES
             b1.setBackgroundResource(img1);
             b2.setBackgroundResource(img2);
             b3.setBackgroundResource(img3);
@@ -91,20 +94,22 @@ public class Juego extends AppCompatActivity {
             b9.setBackgroundResource(img9);
 
 
-            turn=1;
             b1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Toast.makeText(Juego.this, "Datos Incorrectos!", Toast.LENGTH_SHORT).show();
                     if(buttonActual == null){
                         imgAuxAct=b1.getBackground();
                         Toast.makeText(Juego.this, "ENTRO!", Toast.LENGTH_SHORT).show();
                         buttonActual = b1;
-                        //b5.setBackgroundDrawable(imgAuxAct);
                     }else{
-
+                        imgAuxCam=b1.getBackground();
+                        b1.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
                     }
-                    checkGame();
+                    seGano();//VERIFICAR SI TERMINO EL JUEGO
                 }
             });
             b2.setOnClickListener(new View.OnClickListener() {
@@ -112,68 +117,137 @@ public class Juego extends AppCompatActivity {
                 public void onClick(View v) {
                     if(buttonActual == null){
                         imgAuxAct=b2.getBackground();
-                        Toast.makeText(Juego.this, "ENTRO!", Toast.LENGTH_SHORT).show();
                         buttonActual = b2;
-                        //b5.setBackgroundDrawable(imgAuxAct);
                     }else{
                         imgAuxCam=b2.getBackground();
                         b2.setBackgroundDrawable(imgAuxAct);
                         buttonActual.setBackgroundDrawable(imgAuxCam);
                         buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
                     }
-                    checkGame();
+                    seGano();
 
                 }
             });
             b3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b3.getBackground();
+                        buttonActual = b3;
+                    }else{
+                        imgAuxCam=b3.getBackground();
+                        b3.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
 
             });
             b4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b4.getBackground();
+                        buttonActual = b4;
+                    }else{
+                        imgAuxCam=b4.getBackground();
+                        b4.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
             });
             b5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b5.getBackground();
+                        buttonActual = b5;
+                    }else{
+                        imgAuxCam=b5.getBackground();
+                        b5.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
             });
             b6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b6.getBackground();
+                        buttonActual = b6;
+                    }else{
+                        imgAuxCam=b6.getBackground();
+                        b6.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
             });
             b7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b7.getBackground();
+                        buttonActual = b7;
+                    }else{
+                        imgAuxCam=b7.getBackground();
+                        b7.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
             });
             b8.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b8.getBackground();
+                        buttonActual = b8;
+                    }else{
+                        imgAuxCam=b8.getBackground();
+                        b8.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
             });
             b9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    checkGame();
+                    if(buttonActual == null){
+                        imgAuxAct=b9.getBackground();
+                        buttonActual = b9;
+                    }else{
+                        imgAuxCam=b9.getBackground();
+                        b9.setBackgroundDrawable(imgAuxAct);
+                        buttonActual.setBackgroundDrawable(imgAuxCam);
+                        buttonActual=null;
+                        imgAuxCam=null;
+                        imgAuxAct=null;
+                    }
+                    seGano();
                 }
             });
         }
