@@ -17,10 +17,10 @@ public class Juego extends AppCompatActivity {
     }
 
 
-        Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;
-        int img1, img2, img3, img4, img5, img6, img7, img8, img9;
-        Drawable imgAuxAct,imgAuxCam;
-        int turnos=0;
+        Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;// BOTONES DE LA GRILLA
+        int img1, img2, img3, img4, img5, img6, img7, img8, img9;//INDICE DE IMAGENES
+        Drawable imgAuxAct,imgAuxCam;// PARA EL INTERCAMBIO DE IMAGENES
+        int turnos=0,posicionActual;
         public void seGano(){
             checkWinner(b1,b2,b3);
             checkWinner(b4,b5,b6);
@@ -99,15 +99,20 @@ public class Juego extends AppCompatActivity {
                 public void onClick(View v) {
                     if(buttonActual == null){
                         imgAuxAct=b1.getBackground();
-                        Toast.makeText(Juego.this, "ENTRO!", Toast.LENGTH_SHORT).show();
                         buttonActual = b1;
+                        posicionActual = 1;
                     }else{
-                        imgAuxCam=b1.getBackground();
-                        b1.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(1)) {
+                            //String as="B1"+ buttonActual.getId();
+                            //Toast.makeText(Juego.this, as, Toast.LENGTH_SHORT).show();
+                            imgAuxCam = b1.getBackground();
+                            b1.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();//VERIFICAR SI TERMINO EL JUEGO
                 }
@@ -118,13 +123,17 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b2.getBackground();
                         buttonActual = b2;
+                        posicionActual =2;
                     }else{
-                        imgAuxCam=b2.getBackground();
-                        b2.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(2)) {
+                            imgAuxCam = b2.getBackground();
+                            b2.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
 
@@ -136,13 +145,17 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b3.getBackground();
                         buttonActual = b3;
+                        posicionActual=3;
                     }else{
-                        imgAuxCam=b3.getBackground();
-                        b3.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(3)) {
+                            imgAuxCam = b3.getBackground();
+                            b3.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
                 }
@@ -154,13 +167,17 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b4.getBackground();
                         buttonActual = b4;
+                        posicionActual=4;
                     }else{
-                        imgAuxCam=b4.getBackground();
-                        b4.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(4)) {
+                            imgAuxCam = b4.getBackground();
+                            b4.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
                 }
@@ -171,6 +188,7 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b5.getBackground();
                         buttonActual = b5;
+                        posicionActual=5;
                     }else{
                         imgAuxCam=b5.getBackground();
                         b5.setBackgroundDrawable(imgAuxAct);
@@ -178,6 +196,7 @@ public class Juego extends AppCompatActivity {
                         buttonActual=null;
                         imgAuxCam=null;
                         imgAuxAct=null;
+                        posicionActual=0;
                     }
                     seGano();
                 }
@@ -188,13 +207,17 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b6.getBackground();
                         buttonActual = b6;
+                        posicionActual=6;
                     }else{
-                        imgAuxCam=b6.getBackground();
-                        b6.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(6)) {
+                            imgAuxCam = b6.getBackground();
+                            b6.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
                 }
@@ -205,13 +228,17 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b7.getBackground();
                         buttonActual = b7;
+                        posicionActual=7;
                     }else{
-                        imgAuxCam=b7.getBackground();
-                        b7.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(7)) {
+                            imgAuxCam = b7.getBackground();
+                            b7.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
                 }
@@ -222,13 +249,17 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b8.getBackground();
                         buttonActual = b8;
+                        posicionActual=8;
                     }else{
-                        imgAuxCam=b8.getBackground();
-                        b8.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(8)) {
+                            imgAuxCam = b8.getBackground();
+                            b8.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
                 }
@@ -239,17 +270,55 @@ public class Juego extends AppCompatActivity {
                     if(buttonActual == null){
                         imgAuxAct=b9.getBackground();
                         buttonActual = b9;
+                        posicionActual=9;
                     }else{
-                        imgAuxCam=b9.getBackground();
-                        b9.setBackgroundDrawable(imgAuxAct);
-                        buttonActual.setBackgroundDrawable(imgAuxCam);
-                        buttonActual=null;
-                        imgAuxCam=null;
-                        imgAuxAct=null;
+                        if(esValido(9)) {
+                            imgAuxCam = b9.getBackground();
+                            b9.setBackgroundDrawable(imgAuxAct);
+                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                            buttonActual = null;
+                            imgAuxCam = null;
+                            imgAuxAct = null;
+                            posicionActual = 0;
+                        }
                     }
                     seGano();
                 }
             });
+        }
+
+        public boolean esValido(int posicion){
+            Boolean resultado=false;
+            switch(posicion){
+                case 1:{
+                        if(posicionActual==2 || posicionActual==4 || posicionActual==5){resultado=true;}
+                    break;
+                }
+                case 2:{
+                        if(posicionActual==1 || posicionActual==3 || posicionActual==4 || posicionActual==5|| posicionActual==6){resultado=true;}
+                    break;
+                }
+                case 3:{
+                        if(posicionActual==2 || posicionActual==5 || posicionActual==6){resultado=true;}
+                    break;
+                }case 4:{
+                        if(posicionActual==1 || posicionActual==2 || posicionActual==5 || posicionActual==7|| posicionActual==8){resultado=true;}
+                    break;
+                }case 6:{
+                        if(posicionActual==3 || posicionActual==2 || posicionActual==5 || posicionActual==8|| posicionActual==9){resultado=true;}
+                    break;
+                }case 7:{
+                        if(posicionActual==4 || posicionActual==5 || posicionActual==8){resultado=true;}
+                    break;
+                }case 8:{
+                        if(posicionActual==7 || posicionActual==4 || posicionActual==5 || posicionActual==6|| posicionActual==9){resultado=true;}
+                    break;
+                }case 9:{
+                        if(posicionActual==8 || posicionActual==5 || posicionActual==6){resultado=true;}
+                    break;
+                }
+            }
+            return resultado;
         }
 
 
