@@ -1,5 +1,6 @@
 package labprog.rompecabezasandroid;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,101 +20,79 @@ public class Juego extends AppCompatActivity {
     }
 
 
-        Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;// BOTONES DE LA GRILLA
-        int img1, img2, img3, img4, img5, img6, img7, img8, img9;//INDICE DE IMAGENES
-        Drawable imgAuxAct,imgAuxCam;// PARA EL INTERCAMBIO DE IMAGENES
-        int turnos=0,posicionActual;
-        public void seGano(){
-            checkWinner(b1,b2,b3);
-            checkWinner(b4,b5,b6);
-            checkWinner(b7,b8,b9);
-            checkWinner(b1,b4,b7);
-            checkWinner(b2,b5,b8);
-            checkWinner(b3,b6,b9);
-            checkWinner(b1,b5,b9);
-            checkWinner(b3,b5,b7);
+    Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;   // BOTONES AUXILIARES
+    Drawable imgAuxAct,imgAuxCam;                                   // PARA EL INTERCAMBIO DE IMAGENES
+    int turnos=0,posicionActual;                                    // TURNO ES EL CONTADOR DE PUNTOS
+    Button[] arrayBotones= new Button[9];                           // ARREGLO DE BOTONES DEL JUEGO
+
+    /**
+     *  VERIFICA SI SE GANO EL JUEGO PARA FINALIZARLO, EN CASO CONTRARIO SE SUMA 1 A TURNO
+     */
+    public void seGano(){
+        if (verificarGanador()){
+            Toast.makeText(getApplicationContext(),"Feliciataciones, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
+            this.turnos = 0;
+            //REDIRECCIONAR AL RANKING
+            Intent toys;
+            toys = new Intent(Juego.this , Ranking.class);
+            startActivity(toys);
+        }else{
+            //SUMAR UN TURNO
+            this.turnos++;
         }
 
-        public void checkWinner(Button b1,Button b2,Button b3){
-            if (b1.getText()==b2.getText().toString() && b2.getText().toString()==b3.getText().toString() && b3.getText().toString()=="X"){
-                Toast.makeText(Juego.this,"player 1 is winner ",Toast.LENGTH_LONG).show();
+    }
 
-            }
-            if (b1.getText()==b2.getText().toString() && b2.getText().toString()==b3.getText().toString() && b3.getText().toString()=="O"){
-                //player 2 wins
-                Toast.makeText(Juego.this,"player 2 is winner ",Toast.LENGTH_LONG).show();
-            }
+    /**
+     *  CHEQUEO DEL JUEGO DE CADA BOTON, PARA SABER SI TERMINA
+     */
+    public boolean verificarGanador(){
+        boolean termina = false;
+
+        return termina;
+    }
+
+    /**
+     * REINICIO DEL JUEGO
+     */
+    public void reset(View view){
+            inicio();
         }
-        public void reset(View view){
-            turnos =0;
-            b1.setText("T");
-            b2.setText("T");
-            b4.setText("");
-            b5.setText("");
-            b6.setText("");
-            b7.setText("");
-            b8.setText("");
-            b9.setText("");
 
-        }
-/*
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            //setContentView(R.layout.startup);
-        }*/
-        public void inicio(){
+    /**
+     *  METODO INICIAL DEL JUEGO
+     */
+    public void inicio(){
 
-             int random =1;// new Random().nextInt(1) + 9;
-            //ACA VA UN FOR
-            String buttonID = "b" + random;
+            //int random =1;// new Random().nextInt(1) + 9;
+            turnos=0;
             setContentView(R.layout.activity_juego);
-            int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-            //RECUPERACION DE LOS BOTONES
-            b1=(Button) findViewById(resID);
-            b2=(Button) findViewById(R.id.b2);
-            b3=(Button) findViewById(R.id.b3);
-            b4=(Button) findViewById(R.id.b4);
-            b5=(Button) findViewById(R.id.b5);
-            b6=(Button) findViewById(R.id.b6);
-            b7=(Button) findViewById(R.id.b7);
-            b8=(Button) findViewById(R.id.b8);
-            b9=(Button) findViewById(R.id.b9);
-            //ESTABLECER IMAGENES
-            img1=R.drawable.marioparte1;
-            img2=R.drawable.marioparte2;
-            img3=R.drawable.marioparte3;
-            img4=R.drawable.marioparte4;
-            img5=R.drawable.marioparte5;
-            img6=R.drawable.marioparte6;
-            img7=R.drawable.marioparte7;
-            img8=R.drawable.marioparte8;
-            img9=R.drawable.marioparte9;
-            //LIGAR IMAGENES CON LOS BOTONES
-            b1.setBackgroundResource(img1);
-            b2.setBackgroundResource(img2);
-            b3.setBackgroundResource(img3);
-            b4.setBackgroundResource(img4);
-            b5.setBackgroundResource(img5);
-            b6.setBackgroundResource(img6);
-            b7.setBackgroundResource(img7);
-            b8.setBackgroundResource(img8);
-            b9.setBackgroundResource(img9);
+            String buttonID = "",imagenID="";
+            int resID;
 
+            for(int i=1; i<10;i++){
+                //RECUPERACION DE LOS BOTONES
+                buttonID = "b" + i;
+                resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                arrayBotones[i-1]=(Button) findViewById(resID);
+                //ESTABLECER IMAGENES
+                imagenID="marioparte"+i;
+                resID = getResources().getIdentifier(imagenID, "drawable", getPackageName());
+                //LIGAR IMAGENES CON LOS BOTONES
+                arrayBotones[i-1].setBackgroundResource(resID);
+            }
 
-            b1.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[0].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b1.getBackground();
-                        buttonActual = b1;
+                        imgAuxAct=arrayBotones[0].getBackground();
+                        buttonActual = arrayBotones[0];
                         posicionActual = 1;
                     }else{
                         if(esValido(1)) {
-                            //String as="B1"+ buttonActual.getId();
-                            //Toast.makeText(Juego.this, as, Toast.LENGTH_SHORT).show();
-                            imgAuxCam = b1.getBackground();
-                            b1.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[0].getBackground();
+                            arrayBotones[0].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -124,17 +103,17 @@ public class Juego extends AppCompatActivity {
                     seGano();//VERIFICAR SI TERMINO EL JUEGO
                 }
             });
-            b2.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[1].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b2.getBackground();
-                        buttonActual = b2;
+                        imgAuxAct=arrayBotones[1].getBackground();
+                        buttonActual = arrayBotones[1];
                         posicionActual =2;
                     }else{
                         if(esValido(2)) {
-                            imgAuxCam = b2.getBackground();
-                            b2.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[1].getBackground();
+                            arrayBotones[1].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -146,17 +125,17 @@ public class Juego extends AppCompatActivity {
 
                 }
             });
-            b3.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[2].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b3.getBackground();
-                        buttonActual = b3;
+                        imgAuxAct=arrayBotones[2].getBackground();
+                        buttonActual = arrayBotones[2];
                         posicionActual=3;
                     }else{
                         if(esValido(3)) {
-                            imgAuxCam = b3.getBackground();
-                            b3.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[2].getBackground();
+                            arrayBotones[2].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -168,17 +147,17 @@ public class Juego extends AppCompatActivity {
                 }
 
             });
-            b4.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[3].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b4.getBackground();
-                        buttonActual = b4;
+                        imgAuxAct=arrayBotones[3].getBackground();
+                        buttonActual = arrayBotones[3];
                         posicionActual=4;
                     }else{
                         if(esValido(4)) {
-                            imgAuxCam = b4.getBackground();
-                            b4.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[3].getBackground();
+                            arrayBotones[3].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -189,16 +168,16 @@ public class Juego extends AppCompatActivity {
                     seGano();
                 }
             });
-            b5.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[4].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b5.getBackground();
-                        buttonActual = b5;
+                        imgAuxAct=arrayBotones[4].getBackground();
+                        buttonActual = arrayBotones[4];
                         posicionActual=5;
                     }else{
-                        imgAuxCam=b5.getBackground();
-                        b5.setBackgroundDrawable(imgAuxAct);
+                        imgAuxCam=arrayBotones[4].getBackground();
+                        arrayBotones[4].setBackgroundDrawable(imgAuxAct);
                         buttonActual.setBackgroundDrawable(imgAuxCam);
                         buttonActual=null;
                         imgAuxCam=null;
@@ -208,17 +187,17 @@ public class Juego extends AppCompatActivity {
                     seGano();
                 }
             });
-            b6.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[5].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b6.getBackground();
-                        buttonActual = b6;
+                        imgAuxAct=arrayBotones[5].getBackground();
+                        buttonActual = arrayBotones[5];
                         posicionActual=6;
                     }else{
                         if(esValido(6)) {
-                            imgAuxCam = b6.getBackground();
-                            b6.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[5].getBackground();
+                            arrayBotones[5].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -229,17 +208,17 @@ public class Juego extends AppCompatActivity {
                     seGano();
                 }
             });
-            b7.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[6].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b7.getBackground();
-                        buttonActual = b7;
+                        imgAuxAct=arrayBotones[6].getBackground();
+                        buttonActual = arrayBotones[6];
                         posicionActual=7;
                     }else{
                         if(esValido(7)) {
-                            imgAuxCam = b7.getBackground();
-                            b7.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[6].getBackground();
+                            arrayBotones[6].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -250,17 +229,17 @@ public class Juego extends AppCompatActivity {
                     seGano();
                 }
             });
-            b8.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[7].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b8.getBackground();
-                        buttonActual = b8;
+                        imgAuxAct=arrayBotones[7].getBackground();
+                        buttonActual = arrayBotones[7];
                         posicionActual=8;
                     }else{
                         if(esValido(8)) {
-                            imgAuxCam = b8.getBackground();
-                            b8.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[7].getBackground();
+                            arrayBotones[7].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -271,17 +250,17 @@ public class Juego extends AppCompatActivity {
                     seGano();
                 }
             });
-            b9.setOnClickListener(new View.OnClickListener() {
+            arrayBotones[8].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
-                        imgAuxAct=b9.getBackground();
-                        buttonActual = b9;
+                        imgAuxAct=arrayBotones[8].getBackground();
+                        buttonActual = arrayBotones[8];
                         posicionActual=9;
                     }else{
                         if(esValido(9)) {
-                            imgAuxCam = b9.getBackground();
-                            b9.setBackgroundDrawable(imgAuxAct);
+                            imgAuxCam = arrayBotones[8].getBackground();
+                            arrayBotones[8].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
                             buttonActual = null;
                             imgAuxCam = null;
@@ -294,7 +273,10 @@ public class Juego extends AppCompatActivity {
             });
         }
 
-        public boolean esValido(int posicion){
+    /**
+     *  VERIRIFCACION DE MOVIVIEMTOS VALIDOS
+     */
+    public boolean esValido(int posicion){
             Boolean resultado=false;
             switch(posicion){
                 case 1:{

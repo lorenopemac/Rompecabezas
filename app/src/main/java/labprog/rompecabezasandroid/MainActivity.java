@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public Button but1;
     public Button but2;
+    public Button but3;
     public void init(){
         //BOTON PARA ACCEDER A LA BD
         but1 = (Button) findViewById(R.id.button1);
@@ -36,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent toys;
                 toys = new Intent(MainActivity.this , Registro.class);
+                startActivity(toys);
+            }
+        });
+        //BOTON PARA RANKING
+        but2 = (Button) findViewById(R.id.button3);
+        but2.setOnClickListener(new  View.OnClickListener(){
+            public void onClick(View v){
+                Intent toys;
+                toys = new Intent(MainActivity.this , Ranking.class);
                 startActivity(toys);
             }
         });
