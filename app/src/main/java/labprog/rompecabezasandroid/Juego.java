@@ -24,6 +24,7 @@ public class Juego extends AppCompatActivity {
     Drawable imgAuxAct,imgAuxCam;                                   // PARA EL INTERCAMBIO DE IMAGENES
     int turnos=0,posicionActual;                                    // TURNO ES EL CONTADOR DE PUNTOS
     Button[] arrayBotones= new Button[9];                           // ARREGLO DE BOTONES DEL JUEGO
+    int[] arrayImage= new int[9];
 
     /**
      *  VERIFICA SI SE GANO EL JUEGO PARA FINALIZARLO, EN CASO CONTRARIO SE SUMA 1 A TURNO
@@ -33,9 +34,9 @@ public class Juego extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Feliciataciones, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
             this.turnos = 0;
             //REDIRECCIONAR AL RANKING
-            Intent toys;
+            /*Intent toys;
             toys = new Intent(Juego.this , Ranking.class);
-            startActivity(toys);
+            startActivity(toys);*/
         }else{
             //SUMAR UN TURNO
             this.turnos++;
@@ -48,7 +49,12 @@ public class Juego extends AppCompatActivity {
      */
     public boolean verificarGanador(){
         boolean termina = false;
+        for(int k=0;k<9;k++){
+            /*if(arrayBotones[k].getBackground() = arrayImage[k]){
 
+            }*/
+            
+        }
         return termina;
     }
 
@@ -63,7 +69,7 @@ public class Juego extends AppCompatActivity {
      *  METODO INICIAL DEL JUEGO
      */
     public void inicio(){
-
+            arrayGanador();
             //int random =1;// new Random().nextInt(1) + 9;
             turnos=0;
             setContentView(R.layout.activity_juego);
@@ -308,7 +314,23 @@ public class Juego extends AppCompatActivity {
                 }
             }
             return resultado;
-        }
+    }
 
+    /**
+     * ARMADO DE ARRAY CON IDS DE IMAGENES PARA SABER CUANDO SE TERMINA EL JUEGO
+     */
+    public void arrayGanador(){
+        String imagenID="";
+        arrayImage[0]=getResources().getIdentifier("marioparte1", "drawable", getPackageName());
+        arrayImage[1]=getResources().getIdentifier("marioparte4", "drawable", getPackageName());
+        arrayImage[2]=getResources().getIdentifier("marioparte7", "drawable", getPackageName());
+        arrayImage[3]=getResources().getIdentifier("marioparte2", "drawable", getPackageName());
+        arrayImage[4]=getResources().getIdentifier("marioparte5", "drawable", getPackageName());
+        arrayImage[5]=getResources().getIdentifier("marioparte8", "drawable", getPackageName());
+        arrayImage[6]=getResources().getIdentifier("marioparte3", "drawable", getPackageName());
+        arrayImage[7]=getResources().getIdentifier("marioparte6", "drawable", getPackageName());
+        arrayImage[8]=getResources().getIdentifier("marioparte9", "drawable", getPackageName());
+
+    }
 
 }

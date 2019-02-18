@@ -40,15 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(toys);
             }
         });
-        //BOTON PARA RANKING
-        but2 = (Button) findViewById(R.id.button3);
-        but2.setOnClickListener(new  View.OnClickListener(){
-            public void onClick(View v){
-                Intent toys;
-                toys = new Intent(MainActivity.this , Ranking.class);
-                startActivity(toys);
-            }
-        });
     }
 
 
