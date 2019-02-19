@@ -57,7 +57,8 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this,"Correcto!", Toast.LENGTH_SHORT).show();
             db.close();
             Intent toys;
-            toys = new Intent(Login.this , Juego.class);
+            toys = new Intent(Login.this , Menu.class);
+            //toys.putExtra("tipo",1);
             startActivity(toys);
         }else{
             Toast.makeText(this,"Datos Incorrectos!", Toast.LENGTH_SHORT).show();

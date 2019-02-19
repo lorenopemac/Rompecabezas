@@ -3,11 +3,10 @@ package labprog.rompecabezasandroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class menu extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
 
     Button butMario,butPaloma;
     @Override
@@ -18,7 +17,17 @@ public class menu extends AppCompatActivity {
         butMario.setOnClickListener(new  View.OnClickListener(){
             public void onClick(View v){
                 Intent toys;
-                toys = new Intent(menu.this , Juego.class);
+                toys = new Intent(Menu.this , Juego.class);
+                toys.putExtra("tipo","marioparte");
+                startActivity(toys);
+            }
+        });
+        butPaloma = (Button) findViewById(R.id.btnPaloma);
+        butPaloma.setOnClickListener(new  View.OnClickListener(){
+            public void onClick(View v){
+                Intent toys;
+                toys = new Intent(Menu.this , Juego.class);
+                toys.putExtra("tipo","paloma");
                 startActivity(toys);
             }
         });

@@ -12,20 +12,24 @@ import java.util.Random;
 
 public class Juego extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_juego);
-        inicio();
-    }
-
-
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;   // BOTONES AUXILIARES
     Drawable imgAuxAct,imgAuxCam;                                   // PARA EL INTERCAMBIO DE IMAGENES
     int turnos=0,posicionActual,idImgAux=0;                         // TURNO ES EL CONTADOR DE PUNTOS,idImgAux usado para conocer los id de las imagenes de cada boton
     Button[] arrayBotones= new Button[9];                           // ARREGLO DE BOTONES DEL JUEGO
     int[] arrayImageGanador= new int[9];                            // ARRAY CON EL ORDEN DE IDS DE IMAGENES GANADORAS
-    int[] arrayImage = new int[9];                                   // ARRAY DE IDS DE LAS IMAGENES
+    int[] arrayImage = new int[9];                                  // ARRAY DE IDS DE LAS IMAGENES
+    String tipo;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_juego);
+        Bundle extras = getIntent().getExtras();
+        tipo = extras.getString("tipo");
+        //Toast.makeText(getApplicationContext(),"! "+extrasValue,Toast.LENGTH_SHORT).show();
+        inicio();// METODO PRINCIPAL
+    }
+
+
 
     /**
      *  VERIFICA SI SE GANO EL JUEGO PARA FINALIZARLO, EN CASO CONTRARIO SE SUMA 1 A TURNO
@@ -85,7 +89,7 @@ public class Juego extends AppCompatActivity {
                 resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                 arrayBotones[i-1]=(Button) findViewById(resID);
                 //ESTABLECER IMAGENES
-                imagenID="marioparte"+i;
+                imagenID=tipo+i;
                 resID = getResources().getIdentifier(imagenID, "drawable", getPackageName());
                 arrayImage[i-1]=resID; // guardado de los ids de las imagenes para la verificacion del ganador
                 //LIGAR IMAGENES CON LOS BOTONES
@@ -369,16 +373,28 @@ public class Juego extends AppCompatActivity {
      * ARMADO DE ARRAY CON IDS DE IMAGENES PARA SABER CUANDO SE TERMINA EL JUEGO
      */
     public void arrayGanador(){
-        String imagenID="";
-        arrayImageGanador[0]=getResources().getIdentifier("marioparte1", "drawable", getPackageName());
-        arrayImageGanador[1]=getResources().getIdentifier("marioparte4", "drawable", getPackageName());
-        arrayImageGanador[2]=getResources().getIdentifier("marioparte7", "drawable", getPackageName());
-        arrayImageGanador[3]=getResources().getIdentifier("marioparte2", "drawable", getPackageName());
-        arrayImageGanador[4]=getResources().getIdentifier("marioparte5", "drawable", getPackageName());
-        arrayImageGanador[5]=getResources().getIdentifier("marioparte8", "drawable", getPackageName());
-        arrayImageGanador[6]=getResources().getIdentifier("marioparte3", "drawable", getPackageName());
-        arrayImageGanador[7]=getResources().getIdentifier("marioparte6", "drawable", getPackageName());
-        arrayImageGanador[8]=getResources().getIdentifier("marioparte9", "drawable", getPackageName());
+        if(tipo.toString().equals("marioparte")){
+            arrayImageGanador[0]=getResources().getIdentifier("marioparte1", "drawable", getPackageName());
+            arrayImageGanador[1]=getResources().getIdentifier("marioparte4", "drawable", getPackageName());
+            arrayImageGanador[2]=getResources().getIdentifier("marioparte7", "drawable", getPackageName());
+            arrayImageGanador[3]=getResources().getIdentifier("marioparte2", "drawable", getPackageName());
+            arrayImageGanador[4]=getResources().getIdentifier("marioparte5", "drawable", getPackageName());
+            arrayImageGanador[5]=getResources().getIdentifier("marioparte8", "drawable", getPackageName());
+            arrayImageGanador[6]=getResources().getIdentifier("marioparte3", "drawable", getPackageName());
+            arrayImageGanador[7]=getResources().getIdentifier("marioparte6", "drawable", getPackageName());
+            arrayImageGanador[8]=getResources().getIdentifier("marioparte9", "drawable", getPackageName());
+        }
+        if(tipo.toString().equals("paloma")){
+            arrayImageGanador[0]=getResources().getIdentifier("paloma1", "drawable", getPackageName());
+            arrayImageGanador[1]=getResources().getIdentifier("paloma4", "drawable", getPackageName());
+            arrayImageGanador[2]=getResources().getIdentifier("paloma7", "drawable", getPackageName());
+            arrayImageGanador[3]=getResources().getIdentifier("paloma2", "drawable", getPackageName());
+            arrayImageGanador[4]=getResources().getIdentifier("paloma5", "drawable", getPackageName());
+            arrayImageGanador[5]=getResources().getIdentifier("paloma8", "drawable", getPackageName());
+            arrayImageGanador[6]=getResources().getIdentifier("paloma3", "drawable", getPackageName());
+            arrayImageGanador[7]=getResources().getIdentifier("paloma6", "drawable", getPackageName());
+            arrayImageGanador[8]=getResources().getIdentifier("paloma9", "drawable", getPackageName());
+        }
     }
 
 }
