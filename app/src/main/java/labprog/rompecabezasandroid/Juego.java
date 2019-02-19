@@ -22,9 +22,10 @@ public class Juego extends AppCompatActivity {
 
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;   // BOTONES AUXILIARES
     Drawable imgAuxAct,imgAuxCam;                                   // PARA EL INTERCAMBIO DE IMAGENES
-    int turnos=0,posicionActual;                                    // TURNO ES EL CONTADOR DE PUNTOS
+    int turnos=0,posicionActual,idImgAux=0;                         // TURNO ES EL CONTADOR DE PUNTOS,idImgAux usado para conocer los id de las imagenes de cada boton
     Button[] arrayBotones= new Button[9];                           // ARREGLO DE BOTONES DEL JUEGO
-    int[] arrayImage= new int[9];
+    int[] arrayImageGanador= new int[9];                            // ARRAY CON EL ORDEN DE IDS DE IMAGENES GANADORAS
+    int[] arrayImage = new int[9];                                   // ARRAY DE IDS DE LAS IMAGENES
 
     /**
      *  VERIFICA SI SE GANO EL JUEGO PARA FINALIZARLO, EN CASO CONTRARIO SE SUMA 1 A TURNO
@@ -48,12 +49,14 @@ public class Juego extends AppCompatActivity {
      *  CHEQUEO DEL JUEGO DE CADA BOTON, PARA SABER SI TERMINA
      */
     public boolean verificarGanador(){
-        boolean termina = false;
-        for(int k=0;k<9;k++){
-            /*if(arrayBotones[k].getBackground() = arrayImage[k]){
+        boolean termina = true;
+        int k = 0;
 
-            }*/
-            
+        while(termina && k<9){
+            if(arrayImageGanador[k] != arrayImage[k]){//la imagen no esta en su lugar
+                termina = false;
+            }
+            k++;
         }
         return termina;
     }
@@ -84,6 +87,7 @@ public class Juego extends AppCompatActivity {
                 //ESTABLECER IMAGENES
                 imagenID="marioparte"+i;
                 resID = getResources().getIdentifier(imagenID, "drawable", getPackageName());
+                arrayImage[i-1]=resID; // guardado de los ids de las imagenes para la verificacion del ganador
                 //LIGAR IMAGENES CON LOS BOTONES
                 arrayBotones[i-1].setBackgroundResource(resID);
             }
@@ -103,6 +107,11 @@ public class Juego extends AppCompatActivity {
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[0];
+                            arrayImage[0]=idImgAux;
+                            //IDIMAGENES
                             posicionActual = 0;
                         }
                     }
@@ -124,6 +133,11 @@ public class Juego extends AppCompatActivity {
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[1];
+                            arrayImage[1]=idImgAux;
+                            //IDIMAGENES
                             posicionActual = 0;
                         }
                     }
@@ -143,6 +157,11 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = arrayBotones[2].getBackground();
                             arrayBotones[2].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[2];
+                            arrayImage[2]=idImgAux;
+                            //IDIMAGENES
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
@@ -165,6 +184,11 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = arrayBotones[3].getBackground();
                             arrayBotones[3].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[3];
+                            arrayImage[3]=idImgAux;
+                            //IDIMAGENES
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
@@ -185,6 +209,11 @@ public class Juego extends AppCompatActivity {
                         imgAuxCam=arrayBotones[4].getBackground();
                         arrayBotones[4].setBackgroundDrawable(imgAuxAct);
                         buttonActual.setBackgroundDrawable(imgAuxCam);
+                        // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                        idImgAux = arrayImage[posicionActual-1];
+                        arrayImage[posicionActual-1]= arrayImage[4];
+                        arrayImage[4]=idImgAux;
+                        //IDIMAGENES
                         buttonActual=null;
                         imgAuxCam=null;
                         imgAuxAct=null;
@@ -205,6 +234,11 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = arrayBotones[5].getBackground();
                             arrayBotones[5].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[5];
+                            arrayImage[5]=idImgAux;
+                            //IDIMAGENES
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
@@ -226,6 +260,11 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = arrayBotones[6].getBackground();
                             arrayBotones[6].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[6];
+                            arrayImage[6]=idImgAux;
+                            //IDIMAGENES
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
@@ -247,6 +286,11 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = arrayBotones[7].getBackground();
                             arrayBotones[7].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[7];
+                            arrayImage[7]=idImgAux;
+                            //IDIMAGENES
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
@@ -268,6 +312,11 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = arrayBotones[8].getBackground();
                             arrayBotones[8].setBackgroundDrawable(imgAuxAct);
                             buttonActual.setBackgroundDrawable(imgAuxCam);
+                            // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
+                            idImgAux = arrayImage[posicionActual-1];
+                            arrayImage[posicionActual-1]= arrayImage[8];
+                            arrayImage[8]=idImgAux;
+                            //IDIMAGENES
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
@@ -321,16 +370,15 @@ public class Juego extends AppCompatActivity {
      */
     public void arrayGanador(){
         String imagenID="";
-        arrayImage[0]=getResources().getIdentifier("marioparte1", "drawable", getPackageName());
-        arrayImage[1]=getResources().getIdentifier("marioparte4", "drawable", getPackageName());
-        arrayImage[2]=getResources().getIdentifier("marioparte7", "drawable", getPackageName());
-        arrayImage[3]=getResources().getIdentifier("marioparte2", "drawable", getPackageName());
-        arrayImage[4]=getResources().getIdentifier("marioparte5", "drawable", getPackageName());
-        arrayImage[5]=getResources().getIdentifier("marioparte8", "drawable", getPackageName());
-        arrayImage[6]=getResources().getIdentifier("marioparte3", "drawable", getPackageName());
-        arrayImage[7]=getResources().getIdentifier("marioparte6", "drawable", getPackageName());
-        arrayImage[8]=getResources().getIdentifier("marioparte9", "drawable", getPackageName());
-
+        arrayImageGanador[0]=getResources().getIdentifier("marioparte1", "drawable", getPackageName());
+        arrayImageGanador[1]=getResources().getIdentifier("marioparte4", "drawable", getPackageName());
+        arrayImageGanador[2]=getResources().getIdentifier("marioparte7", "drawable", getPackageName());
+        arrayImageGanador[3]=getResources().getIdentifier("marioparte2", "drawable", getPackageName());
+        arrayImageGanador[4]=getResources().getIdentifier("marioparte5", "drawable", getPackageName());
+        arrayImageGanador[5]=getResources().getIdentifier("marioparte8", "drawable", getPackageName());
+        arrayImageGanador[6]=getResources().getIdentifier("marioparte3", "drawable", getPackageName());
+        arrayImageGanador[7]=getResources().getIdentifier("marioparte6", "drawable", getPackageName());
+        arrayImageGanador[8]=getResources().getIdentifier("marioparte9", "drawable", getPackageName());
     }
 
 }
