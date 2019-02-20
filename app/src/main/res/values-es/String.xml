@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rompecabezas</string>
+    <string name="title_activity_android_localize">Rompecabezas</string>
+    <string name="langselection">Español</string>
+    <string name="chooselang">Select Language</string>
+    <string name="bienvenida">Bienvenidos al Juego</string>
+    <string name="ingresar">Ingreso</string>
+    <string name="registro">Registrarse</string>
+    <string name="ranking">Ranking</string>
+    <string name="ingreso">Ingresar</string>
+</resources>

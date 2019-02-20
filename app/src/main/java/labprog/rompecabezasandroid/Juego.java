@@ -117,9 +117,10 @@ public class Juego extends AppCompatActivity {
                             arrayImage[0]=idImgAux;
                             //IDIMAGENES
                             posicionActual = 0;
+                            seGano();//VERIFICAR SI TERMINO EL JUEGO
                         }
                     }
-                    seGano();//VERIFICAR SI TERMINO EL JUEGO
+
                 }
             });
             arrayBotones[1].setOnClickListener(new View.OnClickListener() {
@@ -143,9 +144,10 @@ public class Juego extends AppCompatActivity {
                             arrayImage[1]=idImgAux;
                             //IDIMAGENES
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
+
 
                 }
             });
@@ -170,9 +172,10 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = null;
                             imgAuxAct = null;
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
+
                 }
 
             });
@@ -197,9 +200,9 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = null;
                             imgAuxAct = null;
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
                 }
             });
             arrayBotones[4].setOnClickListener(new View.OnClickListener() {
@@ -222,8 +225,8 @@ public class Juego extends AppCompatActivity {
                         imgAuxCam=null;
                         imgAuxAct=null;
                         posicionActual=0;
+                        seGano();
                     }
-                    seGano();
                 }
             });
             arrayBotones[5].setOnClickListener(new View.OnClickListener() {
@@ -247,9 +250,9 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = null;
                             imgAuxAct = null;
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
                 }
             });
             arrayBotones[6].setOnClickListener(new View.OnClickListener() {
@@ -273,9 +276,9 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = null;
                             imgAuxAct = null;
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
                 }
             });
             arrayBotones[7].setOnClickListener(new View.OnClickListener() {
@@ -299,9 +302,9 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = null;
                             imgAuxAct = null;
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
                 }
             });
             arrayBotones[8].setOnClickListener(new View.OnClickListener() {
@@ -325,9 +328,9 @@ public class Juego extends AppCompatActivity {
                             imgAuxCam = null;
                             imgAuxAct = null;
                             posicionActual = 0;
+                            seGano();
                         }
                     }
-                    seGano();
                 }
             });
         }
@@ -385,15 +388,15 @@ public class Juego extends AppCompatActivity {
             arrayImageGanador[8]=getResources().getIdentifier("marioparte9", "drawable", getPackageName());
         }
         if(tipo.toString().equals("paloma")){
-            arrayImageGanador[0]=getResources().getIdentifier("paloma1", "drawable", getPackageName());
-            arrayImageGanador[1]=getResources().getIdentifier("paloma4", "drawable", getPackageName());
-            arrayImageGanador[2]=getResources().getIdentifier("paloma7", "drawable", getPackageName());
-            arrayImageGanador[3]=getResources().getIdentifier("paloma2", "drawable", getPackageName());
-            arrayImageGanador[4]=getResources().getIdentifier("paloma5", "drawable", getPackageName());
-            arrayImageGanador[5]=getResources().getIdentifier("paloma8", "drawable", getPackageName());
-            arrayImageGanador[6]=getResources().getIdentifier("paloma3", "drawable", getPackageName());
-            arrayImageGanador[7]=getResources().getIdentifier("paloma6", "drawable", getPackageName());
-            arrayImageGanador[8]=getResources().getIdentifier("paloma9", "drawable", getPackageName());
+            arrayImageGanador[0]=getResources().getIdentifier("paloma8", "drawable", getPackageName());
+            arrayImageGanador[1]=getResources().getIdentifier("paloma9", "drawable", getPackageName());
+            arrayImageGanador[2]=getResources().getIdentifier("paloma3", "drawable", getPackageName());
+            arrayImageGanador[3]=getResources().getIdentifier("paloma6", "drawable", getPackageName());
+            arrayImageGanador[4]=getResources().getIdentifier("paloma7", "drawable", getPackageName());
+            arrayImageGanador[5]=getResources().getIdentifier("paloma4", "drawable", getPackageName());
+            arrayImageGanador[6]=getResources().getIdentifier("paloma2", "drawable", getPackageName());
+            arrayImageGanador[7]=getResources().getIdentifier("paloma1", "drawable", getPackageName());
+            arrayImageGanador[8]=getResources().getIdentifier("paloma5", "drawable", getPackageName());
         }
     }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rompecabezas</string>
+    <string name="title_activity_android_localize">AndroidLocalize</string>
+    <string name="langselection">जिस भाषा में आप सचिन को नमस्कार करना चाहते हैं का चयन करें!!!!</string>
+    <string name="chooselang">Selecciona un Lenguaje</string>
+    <string-array name="languages">
+        <item>Seleccion lenguaje</item>
+        <item>Español</item>
+        <item>Ingles</item>
+    </string-array>
+    <string name="bienvenida">Bienvenidos al Juego</string>
+    <string name="ingresar">Ingreso</string>
+    <string name="registro">Registrarse</string>
+    <string name="ranking">Ranking</string>
+    <string name="ingreso">Ingresar</string>
+</resources>
