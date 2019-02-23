@@ -58,6 +58,7 @@ public class Login extends AppCompatActivity {
             db.close();
             Intent toys;
             toys = new Intent(Login.this , Menu.class);
+            toys.putExtra("nom",nombres);
             //toys.putExtra("tipo",1);
             startActivity(toys);
         }else{

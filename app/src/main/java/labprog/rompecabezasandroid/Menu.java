@@ -17,7 +17,10 @@ public class Menu extends AppCompatActivity {
         butMario.setOnClickListener(new  View.OnClickListener(){
             public void onClick(View v){
                 Intent toys;
+                Bundle extras = getIntent().getExtras();
+                String username= extras.getString("nom");
                 toys = new Intent(Menu.this , Juego.class);
+                toys.putExtra("nom",username);
                 toys.putExtra("tipo","marioparte");
                 startActivity(toys);
             }
@@ -26,7 +29,10 @@ public class Menu extends AppCompatActivity {
         butPaloma.setOnClickListener(new  View.OnClickListener(){
             public void onClick(View v){
                 Intent toys;
+                Bundle extras = getIntent().getExtras();
+                String username= extras.getString("nom");
                 toys = new Intent(Menu.this , Juego.class);
+                toys.putExtra("nom",username);
                 toys.putExtra("tipo","paloma");
                 startActivity(toys);
             }

@@ -8,11 +8,17 @@ public class usuario {
     private int puntos;
 
 
-    public usuario(Integer id, String nombre, String contraseña,int puntos) {
+    public usuario(){
+        this.id = null;
+        this.nombre = "";
+        this.contraseña = "";
+        this.puntos = 1000;
+    }
+    public usuario(Integer id, String nombre, String contraseña, int puntaje) {
         this.id = id;
         this.nombre = nombre;
         this.contraseña = contraseña;
-        this.puntos = puntos;
+        this.puntos = puntaje;
     }
 
     public Integer getId() {
@@ -39,7 +45,7 @@ public class usuario {
         this.contraseña = contraseña;
     }
 
-    public int getPuntos(){return this.puntos;}
+    public int getPuntaje () {return puntos; }
 
-    public void setPuntos(int puntos){ this.puntos = puntos;}
+    public void setPuntaje(int puntaje){ this.puntos=puntaje; }
 }

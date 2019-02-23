@@ -3,6 +3,7 @@ package labprog.rompecabezasandroid;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     public Button but1;
     public Button but2;
     public Button but3;
+    public MediaPlayer sound;
+    public Button bts;
+
     public void init(){
         //BOTON PARA ACCEDER A LA BD
         but1 = (Button) findViewById(R.id.button1);
@@ -66,6 +70,38 @@ public class MainActivity extends AppCompatActivity {
                 Intent toys;
                 toys = new Intent(MainActivity.this , Registro.class);
                 startActivity(toys);
+            }
+        });
+
+        //BOTON DE RANKING
+        but3 = (Button) findViewById(R.id.button3);
+        but3.setOnClickListener(new  View.OnClickListener(){
+            public void onClick(View v) {
+                Intent toys;
+                toys = new Intent(MainActivity.this, rankings.class);
+                startActivity(toys);
+            }
+        });
+
+        //BOTON DE SONIDO
+        bts = (Button) findViewById(R.id.sonido);
+        sound = MediaPlayer.create(this, R.raw.juego_de_tronos);
+        sound.start();
+
+        bts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(sound.isPlaying()){
+                    sound.pause();
+                    bts.setBackgroundResource(R.drawable.sin_sonido2);
+                    Toast.makeText(MainActivity.this,"Pause",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    sound.start();
+                    bts.setBackgroundResource(R.drawable.sonido3);
+                    Toast.makeText(MainActivity.this,"Play",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

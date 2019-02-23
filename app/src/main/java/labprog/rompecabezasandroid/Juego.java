@@ -1,6 +1,8 @@
 package labprog.rompecabezasandroid;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import entidades.ConexionSQLiteHelper;
+
 public class Juego extends AppCompatActivity {
 
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9,buttonActual, buttonCambio;   // BOTONES AUXILIARES
@@ -18,13 +22,14 @@ public class Juego extends AppCompatActivity {
     Button[] arrayBotones= new Button[9];                           // ARREGLO DE BOTONES DEL JUEGO
     int[] arrayImageGanador= new int[9];                            // ARRAY CON EL ORDEN DE IDS DE IMAGENES GANADORAS
     int[] arrayImage = new int[9];                                  // ARRAY DE IDS DE LAS IMAGENES
-    String tipo;
+    String tipo, username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
         Bundle extras = getIntent().getExtras();
         tipo = extras.getString("tipo");
+        username= extras.getString("nom");
         //Toast.makeText(getApplicationContext(),"! "+extrasValue,Toast.LENGTH_SHORT).show();
         inicio();// METODO PRINCIPAL
     }
@@ -36,8 +41,22 @@ public class Juego extends AppCompatActivity {
      */
     public void seGano(){
         if (verificarGanador()){
-            Toast.makeText(getApplicationContext(),"Feliciataciones, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
-            this.turnos = 0;
+            Toast.makeText(getApplicationContext(),"Felicitaciones GUACHIN!!!, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
+
+            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
+            SQLiteDatabase db= conn.getWritableDatabase();
+
+            Cursor fila = db.rawQuery("select puntos from usuario where nombre='"+username+"'",null);
+
+            fila.moveToFirst();
+            //int  aux= fila.getInt(0);
+            //Toast.makeText(getApplicationContext(),"! "+aux,Toast.LENGTH_SHORT).show();
+
+            if (fila.getInt(0)>this.turnos || fila.getInt(0)==0){
+                //db.rawQuery("update usuario set puntos= "+this.turnos+" WHERE nombre ='"+username+"'", null);
+                db.execSQL("update usuario set puntos= "+this.turnos+" WHERE nombre ='"+username+"'");
+            }
+            db.close();            this.turnos = 0;
             //REDIRECCIONAR AL RANKING
             /*Intent toys;
             toys = new Intent(Juego.this , Ranking.class);

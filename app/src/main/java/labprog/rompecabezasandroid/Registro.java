@@ -51,9 +51,9 @@ public class Registro extends AppCompatActivity {
 
         ContentValues values= new ContentValues();
         //values.put(Utilidades.CAMPO_ID,"1");//campoId.getText().toString());
-        values.put(Utilidades.CAMPO_NOMBRE,nombre);
-        values.put(Utilidades.CAMPO_CONTRASEÑA,contrasenia);
-        values.put("puntos",0);
+        values.put(Utilidades.getCampoNombre(),nombre);
+        values.put(Utilidades.getCampoContraseña(),contrasenia);
+        /*values.put(Utilidades.getCampoPuntaje(),0);*/
 
         Long idResultante=db.insert("usuario",null, values);
         Toast.makeText(this,"Usuario Registrado Correctamente", Toast.LENGTH_SHORT).show();
