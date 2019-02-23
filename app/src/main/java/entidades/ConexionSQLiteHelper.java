@@ -15,7 +15,7 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase baseDatos) {
 
-        baseDatos.execSQL("create table usuario(idUsuario int primary key, nombre text, contrasenia text, puntos int)");
+        baseDatos.execSQL("create table usuario(idUsuario int primary key, nombre text, contrasenia text, puntos int, puntosM int, puntosP int)");
 
     }
 

@@ -12,8 +12,10 @@ public class Utilidades {
     private static final String CAMPO_NOMBRE="nombre";
     private static final String CAMPO_CONTRASEÑA="contrasenia";
     private static final String CAMPO_PUNTAJE= "puntos";
+    private static final String CAMPO_PUNTAJEM= "puntosM";
+    private static final String CAMPO_PUNTAJEP= "puntosP";
 
-    private static final String CREAR_TABLAS_USUARIO="CREATE TABLE"+ TABLA_USUARIO+" ("+CAMPO_ID+" INTEGER PRIMARY KEY,"+CAMPO_NOMBRE+" TEXT,"+CAMPO_CONTRASEÑA+" TEXT"+CAMPO_PUNTAJE+" INTEGER)";
+    private static final String CREAR_TABLAS_USUARIO="CREATE TABLE"+ TABLA_USUARIO+" ("+CAMPO_ID+" INTEGER PRIMARY KEY,"+CAMPO_NOMBRE+" TEXT,"+CAMPO_CONTRASEÑA+" TEXT"+CAMPO_PUNTAJE+" INTEGER" +CAMPO_PUNTAJEM+" INTEGER" +CAMPO_PUNTAJEP+" INTEGER)";
 
 
     public static String getTablaUsuario() {
@@ -38,5 +40,13 @@ public class Utilidades {
 
     public static String getCrearTablasUsuario() {
         return CREAR_TABLAS_USUARIO;
+    }
+
+    public static String getCampoPuntajem() {
+        return CAMPO_PUNTAJEM;
+    }
+
+    public static String getCampoPuntajep() {
+        return CAMPO_PUNTAJEP;
     }
 }

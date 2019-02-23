@@ -15,9 +15,9 @@ import utilidades.Utilidades;
 
 public class rankings extends AppCompatActivity {
 
-    ListView listaDBUsers, listaDBPoint;
+    ListView listaDBUsers, listaDBPointM,listaDBPointP;
     ArrayList<String> listaInfoUsers;
-    ArrayList<Integer> listaInfoPoint;
+    ArrayList<Integer> listaInfoPointM,listaInfoPointP;
     ArrayList<usuario> listaUsers;
 
     ConexionSQLiteHelper conn;
@@ -28,15 +28,18 @@ public class rankings extends AppCompatActivity {
         conn = new ConexionSQLiteHelper(getApplicationContext(),"bdU",null,1);
 
         listaDBUsers = (ListView) findViewById(R.id.listaUsers);
-        listaDBPoint = (ListView) findViewById(R.id.listaPoint);
+        listaDBPointM = (ListView) findViewById(R.id.listaPoint);
+        listaDBPointP = (ListView) findViewById(R.id.listaPoint2);
 
         ConsultarLista();
 
         ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoUsers);
-        ArrayAdapter adaptador2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPoint);
+        ArrayAdapter adaptador2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPointM);
+        ArrayAdapter adaptador3 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPointP);
 
         listaDBUsers.setAdapter(adaptador);
-        listaDBPoint.setAdapter(adaptador2);
+        listaDBPointM.setAdapter(adaptador2);
+        listaDBPointP.setAdapter(adaptador3);
 
 
     }
@@ -52,7 +55,8 @@ public class rankings extends AppCompatActivity {
         while(cursor.moveToNext()){
             user = new usuario();
             user.setNombre(cursor.getString(1));
-            user.setPuntaje(cursor.getInt(3));
+            user.setPuntosM(cursor.getInt(4));
+            user.setPuntosP(cursor.getInt(5));
 
             listaUsers.add(user);
 
@@ -70,14 +74,14 @@ public class rankings extends AppCompatActivity {
 
             for (int j=i;j<listaUsers.size();j++){
 
-                if(listaUsers.get(i).getPuntaje()>listaUsers.get(j).getPuntaje()){
+                if(listaUsers.get(i).getPuntosM()>listaUsers.get(j).getPuntosM()){
                     String name=listaUsers.get(i).getNombre();
                     String pass = listaUsers.get(i).getContraseña();
-                    int point = listaUsers.get(i).getPuntaje();
+                    int point = listaUsers.get(i).getPuntosM();
 
                     listaUsers.get(i).setNombre(listaUsers.get(j).getNombre());
                     listaUsers.get(i).setContraseña(listaUsers.get(j).getContraseña());
-                    listaUsers.get(i).setPuntaje(listaUsers.get(j).getPuntaje());
+                    listaUsers.get(i).setPuntosM(listaUsers.get(j).getPuntosM());
 
                     listaUsers.get(j).setNombre(name);
                     listaUsers.get(j).setContraseña(pass);
@@ -91,7 +95,8 @@ public class rankings extends AppCompatActivity {
 
     private void obtenerLista() {
         listaInfoUsers=new ArrayList<String>();
-        listaInfoPoint = new ArrayList<Integer>();
+        listaInfoPointM = new ArrayList<Integer>();
+        listaInfoPointP = new ArrayList<Integer>();
 
         for(int i=0 ; i<listaUsers.size(); i++){
 
@@ -99,7 +104,8 @@ public class rankings extends AppCompatActivity {
 
                 listaInfoUsers.add(listaUsers.get(i).getNombre());
 
-                listaInfoPoint.add(listaUsers.get(i).getPuntaje());
+                listaInfoPointM.add(listaUsers.get(i).getPuntosM());
+                listaInfoPointP.add(listaUsers.get(i).getPuntosP());
             }
 
 
