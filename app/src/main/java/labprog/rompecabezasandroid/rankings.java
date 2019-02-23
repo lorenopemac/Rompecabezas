@@ -74,18 +74,21 @@ public class rankings extends AppCompatActivity {
 
             for (int j=i;j<listaUsers.size();j++){
 
-                if(listaUsers.get(i).getPuntosM()>listaUsers.get(j).getPuntosM()){
+                if(listaUsers.get(i).getPuntosM()+listaUsers.get(i).getPuntosP()>listaUsers.get(j).getPuntosM()+listaUsers.get(j).getPuntosP()){
                     String name=listaUsers.get(i).getNombre();
                     String pass = listaUsers.get(i).getContraseña();
                     int point = listaUsers.get(i).getPuntosM();
+                    int point2 = listaUsers.get(i).getPuntosP();
 
                     listaUsers.get(i).setNombre(listaUsers.get(j).getNombre());
                     listaUsers.get(i).setContraseña(listaUsers.get(j).getContraseña());
                     listaUsers.get(i).setPuntosM(listaUsers.get(j).getPuntosM());
+                    listaUsers.get(i).setPuntosP(listaUsers.get(j).getPuntosP());
 
                     listaUsers.get(j).setNombre(name);
                     listaUsers.get(j).setContraseña(pass);
-                    listaUsers.get(j).setPuntaje(point);
+                    listaUsers.get(j).setPuntosM(point);
+                    listaUsers.get(j).setPuntosP(point2);
 
                 }
             }
@@ -100,7 +103,7 @@ public class rankings extends AppCompatActivity {
 
         for(int i=0 ; i<listaUsers.size(); i++){
 
-            if(listaUsers.get(i).getPuntaje()!=0){
+            if(listaUsers.get(i).getPuntosM()!=0 && listaUsers.get(i).getPuntosP()!=0){
 
                 listaInfoUsers.add(listaUsers.get(i).getNombre());
 
