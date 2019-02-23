@@ -57,20 +57,51 @@ public class rankings extends AppCompatActivity {
             listaUsers.add(user);
 
         }
+        ordenarLista();
         obtenerLista();
     }
 
+    private void ordenarLista() {
 
-  private void obtenerLista() {
+        ArrayList<usuario> listOrdenada;
+
+        for (int i=0; i<listaUsers.size();i++){
+
+
+            for (int j=i;j<listaUsers.size();j++){
+
+                if(listaUsers.get(i).getPuntaje()>listaUsers.get(j).getPuntaje()){
+                    String name=listaUsers.get(i).getNombre();
+                    String pass = listaUsers.get(i).getContraseña();
+                    int point = listaUsers.get(i).getPuntaje();
+
+                    listaUsers.get(i).setNombre(listaUsers.get(j).getNombre());
+                    listaUsers.get(i).setContraseña(listaUsers.get(j).getContraseña());
+                    listaUsers.get(i).setPuntaje(listaUsers.get(j).getPuntaje());
+
+                    listaUsers.get(j).setNombre(name);
+                    listaUsers.get(j).setContraseña(pass);
+                    listaUsers.get(j).setPuntaje(point);
+
+                }
+            }
+        }
+    }
+
+
+    private void obtenerLista() {
         listaInfoUsers=new ArrayList<String>();
         listaInfoPoint = new ArrayList<Integer>();
 
         for(int i=0 ; i<listaUsers.size(); i++){
 
+            if(listaUsers.get(i).getPuntaje()!=0){
+                
+                listaInfoUsers.add(listaUsers.get(i).getNombre());
 
-            listaInfoUsers.add(listaUsers.get(i).getNombre());
+                listaInfoPoint.add(listaUsers.get(i).getPuntaje());
+            }
 
-            listaInfoPoint.add(listaUsers.get(i).getPuntaje());
 
         }
     }
