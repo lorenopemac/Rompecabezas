@@ -72,11 +72,6 @@ public class Juego extends AppCompatActivity {
                 toys = new Intent(Juego.this , rankings.class);
                 startActivity(toys);
             }
-            Intent toys;
-            toys = new Intent(Juego.this , Menu.class);
-            toys.putExtra("nom",username);
-            //toys.putExtra("tipo",1);
-            startActivity(toys);
         }else{
             //SUMAR UN TURNO
             this.turnos++;

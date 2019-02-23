@@ -34,7 +34,9 @@
                 android:id="@+id/b2"
                 android:textSize="70dp"
                 android:layout_width="match_parent"
+                android:state_pressed="true"
                 android:layout_height="match_parent"
+                android:state_selected="true"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/b3"
