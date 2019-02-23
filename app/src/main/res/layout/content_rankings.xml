@@ -26,36 +26,54 @@
         app:layout_constraintVertical_bias="1.0">
 
         <TextView
-            android:layout_width="190dp"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:textSize="25dp"
             android:id="@+id/textUser"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="USUARIO"
-            />
+            android:textSize="25dp" />
+
         <ListView
             android:id="@+id/listaUsers"
+            android:layout_width="129dp"
+            android:layout_height="592dp"
             android:layout_below="@+id/textUser"
-            android:layout_width="190dp"
-            android:layout_height="match_parent">
-        </ListView>
+            android:layout_marginTop="7dp"></ListView>
 
         <TextView
             android:id="@+id/textPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginLeft="7dp"
             android:layout_toRightOf="@+id/textUser"
-            android:layout_width="190dp"
-            android:layout_height="30dp"
             android:gravity="center"
-            android:textSize="25dp"
-            android:text="PUNTAJE"/>
+            android:text="PUNTAJE MARIO"
+            android:textSize="15dp" />
 
         <ListView
             android:id="@+id/listaPoint"
+            android:layout_width="116dp"
+            android:layout_height="620dp"
             android:layout_below="@+id/textPoint"
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/listaUsers"
-            />
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/listaUsers" />
+        <TextView
+            android:id="@+id/textPoint2"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textPoint"
+            android:gravity="center"
+            android:text="PUNTAJE PALOMA"
+            android:textSize="15dp" />
+
+        <ListView
+            android:id="@+id/listaPoint2"
+            android:layout_width="120dp"
+            android:layout_height="626dp"
+            android:layout_below="@+id/textPoint2"
+            android:layout_marginTop="-1dp"
+            android:layout_toRightOf="@+id/listaPoint" />
 
         </RelativeLayout>
 
