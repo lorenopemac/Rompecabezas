@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public Button but2;
     public Button but3;
     public MediaPlayer sound;
-    public Button bts;
+    public Button bts, bts2;
 
     public void init(){
         //BOTON PARA ACCEDER A LA BD
@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         //BOTON DE SONIDO
         bts = (Button) findViewById(R.id.sonido);
+
         sound = MediaPlayer.create(this, R.raw.juego_de_tronos);
-        sound.start();
 
         bts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     public void setLocale(String lenguaje) {

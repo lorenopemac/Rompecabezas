@@ -96,7 +96,7 @@ public class rankings extends AppCompatActivity {
         for(int i=0 ; i<listaUsers.size(); i++){
 
             if(listaUsers.get(i).getPuntaje()!=0){
-                
+
                 listaInfoUsers.add(listaUsers.get(i).getNombre());
 
                 listaInfoPoint.add(listaUsers.get(i).getPuntaje());
