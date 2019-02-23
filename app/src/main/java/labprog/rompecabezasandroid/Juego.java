@@ -64,12 +64,19 @@ public class Juego extends AppCompatActivity {
                 }else if(tipo.toString().equals("paloma")){
                     db.execSQL("update usuario set puntosP= "+this.turnos+" WHERE nombre ='"+username+"'");
                 }
+                db.close();
+                this.turnos = 0;
+
+                //REDIRECCIONAR AL RANKING
+                Intent toys;
+                toys = new Intent(Juego.this , rankings.class);
+                startActivity(toys);
             }
-            db.close();            this.turnos = 0;
-            //REDIRECCIONAR AL RANKING
-            /*Intent toys;
-            toys = new Intent(Juego.this , Ranking.class);
-            startActivity(toys);*/
+            Intent toys;
+            toys = new Intent(Juego.this , Menu.class);
+            toys.putExtra("nom",username);
+            //toys.putExtra("tipo",1);
+            startActivity(toys);
         }else{
             //SUMAR UN TURNO
             this.turnos++;
