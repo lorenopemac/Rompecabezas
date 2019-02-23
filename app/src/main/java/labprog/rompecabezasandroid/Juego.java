@@ -41,12 +41,16 @@ public class Juego extends AppCompatActivity {
      */
     public void seGano(){
         if (verificarGanador()){
-            Toast.makeText(getApplicationContext(),"Felicitaciones GUACHIN!!!, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Felicitaciones !!!, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
 
             ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
             SQLiteDatabase db= conn.getWritableDatabase();
-
-            Cursor fila = db.rawQuery("select puntos from usuario where nombre='"+username+"'",null);
+            Cursor fila=null;
+            if(tipo.toString().equals("marioparte")){
+                fila = db.rawQuery("select puntosM from usuario where nombre='"+username+"'",null);
+            }else if(tipo.toString().equals("paloma")){
+                fila = db.rawQuery("select puntosP from usuario where nombre='"+username+"'",null);
+            }
 
             fila.moveToFirst();
             //int  aux= fila.getInt(0);
@@ -54,7 +58,12 @@ public class Juego extends AppCompatActivity {
 
             if (fila.getInt(0)>this.turnos || fila.getInt(0)==0){
                 //db.rawQuery("update usuario set puntos= "+this.turnos+" WHERE nombre ='"+username+"'", null);
-                db.execSQL("update usuario set puntos= "+this.turnos+" WHERE nombre ='"+username+"'");
+
+                if(tipo.toString().equals("marioparte")){
+                    db.execSQL("update usuario set puntosM= "+this.turnos+" WHERE nombre ='"+username+"'");
+                }else if(tipo.toString().equals("paloma")){
+                    db.execSQL("update usuario set puntosP= "+this.turnos+" WHERE nombre ='"+username+"'");
+                }
             }
             db.close();            this.turnos = 0;
             //REDIRECCIONAR AL RANKING
