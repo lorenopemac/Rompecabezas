@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:state_pressed="true"
                 android:layout_height="match_parent"
-                android:state_selected="true"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_weight="1"/>
             <Button
                 android:id="@+id/b3"

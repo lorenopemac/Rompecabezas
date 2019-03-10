@@ -41,28 +41,28 @@ public class Juego extends AppCompatActivity {
      */
     public void seGano(){
         if (verificarGanador()){
+            /*
+            *   En caso de ganar el juego
+            */
             Toast.makeText(getApplicationContext(),"Felicitaciones !!!, lo lograste en: "+turnos+" turnos.",Toast.LENGTH_SHORT).show();
 
-            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
+            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);//CONECTAR A LA BD
             SQLiteDatabase db= conn.getWritableDatabase();
             Cursor fila=null;
             if(tipo.toString().equals("marioparte")){
-                fila = db.rawQuery("select puntosM from usuario where nombre='"+username+"'",null);
+                fila = db.rawQuery("select puntosM from usuario where nombre='"+username+"'",null);//BUSCAR PUNTOS PARA MARIO
             }else if(tipo.toString().equals("paloma")){
-                fila = db.rawQuery("select puntosP from usuario where nombre='"+username+"'",null);
+                fila = db.rawQuery("select puntosP from usuario where nombre='"+username+"'",null);//BUSCAR PUNTOS PARA PALOMA
             }
 
-            fila.moveToFirst();
-            //int  aux= fila.getInt(0);
-            //Toast.makeText(getApplicationContext(),"! "+aux,Toast.LENGTH_SHORT).show();
+            fila.moveToFirst();// MOVERSE AL PRIMER PUNTERO
 
             if (fila.getInt(0)>this.turnos || fila.getInt(0)==0){
-                //db.rawQuery("update usuario set puntos= "+this.turnos+" WHERE nombre ='"+username+"'", null);
-
-                if(tipo.toString().equals("marioparte")){
-                    db.execSQL("update usuario set puntosM= "+this.turnos+" WHERE nombre ='"+username+"'");
-                }else if(tipo.toString().equals("paloma")){
-                    db.execSQL("update usuario set puntosP= "+this.turnos+" WHERE nombre ='"+username+"'");
+                // SI LOGRO GANAR CON UNA MENOR CANTIDAD DE PUNTOS
+                if(tipo.toString().equals("marioparte")){// SI SE ESTA JUGANDO MARIO
+                    db.execSQL("update usuario set puntosM= "+this.turnos+" WHERE nombre ='"+username+"'");// ACTUALIZO LA PUNTUACION DE MARIO
+                }else if(tipo.toString().equals("paloma")){// SI SE ESTA JUGANDO PALOMA
+                    db.execSQL("update usuario set puntosP= "+this.turnos+" WHERE nombre ='"+username+"'");// ACTUALIZO LA PUNTUACION DE MARIO
                 }
                 db.close();
                 this.turnos = 0;
@@ -106,13 +106,15 @@ public class Juego extends AppCompatActivity {
      *  METODO INICIAL DEL JUEGO
      */
     public void inicio(){
-            arrayGanador();
-            //int random =1;// new Random().nextInt(1) + 9;
-            turnos=0;
+            arrayGanador();//SE ESTABLECEN LAS POSICIONES QUE DEBE TENER EL JUEGO PARA GANAR
+            turnos=0;//INICIA CON 0 TURNOS JUGADOS
             setContentView(R.layout.activity_juego);
             String buttonID = "",imagenID="";
             int resID;
 
+            /*
+            *   SE LE ASIGNAN LAS IMAGENES A LOS BOTONES
+            */
             for(int i=1; i<10;i++){
                 //RECUPERACION DE LOS BOTONES
                 buttonID = "b" + i;
@@ -126,24 +128,25 @@ public class Juego extends AppCompatActivity {
                 arrayBotones[i-1].setBackgroundResource(resID);
             }
 
-            arrayBotones[0].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[0].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 1
                 @Override
                 public void onClick(View v) {
-                    if(buttonActual == null){
-                        imgAuxAct=arrayBotones[0].getBackground();
-                        buttonActual = arrayBotones[0];
-                        posicionActual = 1;
-                    }else{
-                        if(esValido(1)) {
-                            imgAuxCam = arrayBotones[0].getBackground();
-                            arrayBotones[0].setBackgroundDrawable(imgAuxAct);
-                            buttonActual.setBackgroundDrawable(imgAuxCam);
+                    if(buttonActual == null){// SI NO SE HA SELECCIONADO NINGUN BOTON, ESTE SERA EL ACTUAL
+                        imgAuxAct=arrayBotones[0].getBackground();//GUARDO LA IMAGEN EN UN VARIABLE
+                        buttonActual = arrayBotones[0];//GUARDO LA REFERENCIA DEL BOTON
+                        posicionActual = 1;// POSICION DEL BOTON ACTUAL
+                    }else{// SI YA SE HA SELECCIONADO UN BOTON
+                        if(esValido(1)) {// SE VALIDA QUE SE PUEDA REALIZAR EL MOVIMIENTO
+                            imgAuxCam = arrayBotones[0].getBackground();// ALMACENO LA REFERENCIA DE LA IMAGEN DEL BOTON
+                            arrayBotones[0].setBackgroundDrawable(imgAuxAct);// CAMBIO LA IMAGEN DEL BOTON A LA DEL BUTTONACTUAL
+                            buttonActual.setBackgroundDrawable(imgAuxCam);// CAMBIO LA IMAGEN DEL BUTTONACTUAL A LA DE ESTE BOTON
+                            //REESTABLECER LAS VARIABLES DE INTERCAMBIO
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
                             // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
                             idImgAux = arrayImage[posicionActual-1];
-                            arrayImage[posicionActual-1]= arrayImage[0];
+                            arrayImage[posicionActual-1]= arrayImage[0];//SE ALAMACENA EL ID DE LA IMAGEN, LUEGO SE UTILIZA PARA VERIFICAR GANADOR
                             arrayImage[0]=idImgAux;
                             //IDIMAGENES
                             posicionActual = 0;
@@ -153,7 +156,7 @@ public class Juego extends AppCompatActivity {
 
                 }
             });
-            arrayBotones[1].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[1].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 2
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -181,7 +184,7 @@ public class Juego extends AppCompatActivity {
 
                 }
             });
-            arrayBotones[2].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[2].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 2
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -209,7 +212,7 @@ public class Juego extends AppCompatActivity {
                 }
 
             });
-            arrayBotones[3].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[3].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 3
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -235,7 +238,7 @@ public class Juego extends AppCompatActivity {
                     }
                 }
             });
-            arrayBotones[4].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[4].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 4
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -259,7 +262,7 @@ public class Juego extends AppCompatActivity {
                     }
                 }
             });
-            arrayBotones[5].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[5].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 5
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -285,7 +288,7 @@ public class Juego extends AppCompatActivity {
                     }
                 }
             });
-            arrayBotones[6].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[6].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 6
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -311,7 +314,7 @@ public class Juego extends AppCompatActivity {
                     }
                 }
             });
-            arrayBotones[7].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[7].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 7
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
@@ -337,7 +340,7 @@ public class Juego extends AppCompatActivity {
                     }
                 }
             });
-            arrayBotones[8].setOnClickListener(new View.OnClickListener() {
+            arrayBotones[8].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 8
                 @Override
                 public void onClick(View v) {
                     if(buttonActual == null){
