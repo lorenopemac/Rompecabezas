@@ -128,25 +128,25 @@ public class Juego extends AppCompatActivity {
                 arrayBotones[i-1].setBackgroundResource(resID);
             }
 
-            arrayBotones[0].setOnClickListener(new View.OnClickListener() {// SI SE PRESIONA EL BOTON EN LA POSICION 1
+            arrayBotones[0].setOnClickListener(new View.OnClickListener() {     // SI SE PRESIONA EL BOTON EN LA POSICION 1
                 @Override
                 public void onClick(View v) {
-                    if(buttonActual == null){// SI NO SE HA SELECCIONADO NINGUN BOTON, ESTE SERA EL ACTUAL
-                        imgAuxAct=arrayBotones[0].getBackground();//GUARDO LA IMAGEN EN UN VARIABLE
-                        buttonActual = arrayBotones[0];//GUARDO LA REFERENCIA DEL BOTON
-                        posicionActual = 1;// POSICION DEL BOTON ACTUAL
-                    }else{// SI YA SE HA SELECCIONADO UN BOTON
-                        if(esValido(1)) {// SE VALIDA QUE SE PUEDA REALIZAR EL MOVIMIENTO
-                            imgAuxCam = arrayBotones[0].getBackground();// ALMACENO LA REFERENCIA DE LA IMAGEN DEL BOTON
-                            arrayBotones[0].setBackgroundDrawable(imgAuxAct);// CAMBIO LA IMAGEN DEL BOTON A LA DEL BUTTONACTUAL
-                            buttonActual.setBackgroundDrawable(imgAuxCam);// CAMBIO LA IMAGEN DEL BUTTONACTUAL A LA DE ESTE BOTON
+                    if(buttonActual == null){                                   // SI NO SE HA SELECCIONADO NINGUN BOTON, ESTE SERA EL ACTUAL
+                        imgAuxAct=arrayBotones[0].getBackground();              //GUARDO LA IMAGEN EN UN VARIABLE
+                        buttonActual = arrayBotones[0];                         //GUARDO LA REFERENCIA DEL BOTON
+                        posicionActual = 1;                                     // POSICION DEL BOTON ACTUAL
+                    }else{                                                      // SI YA SE HA SELECCIONADO UN BOTON
+                        if(esValido(1)) {                               // SE VALIDA QUE SE PUEDA REALIZAR EL MOVIMIENTO
+                            imgAuxCam = arrayBotones[0].getBackground();        // ALMACENO LA REFERENCIA DE LA IMAGEN DEL BOTON
+                            arrayBotones[0].setBackgroundDrawable(imgAuxAct);   // CAMBIO LA IMAGEN DEL BOTON A LA DEL BUTTONACTUAL
+                            buttonActual.setBackgroundDrawable(imgAuxCam);      // CAMBIO LA IMAGEN DEL BUTTONACTUAL A LA DE ESTE BOTON
                             //REESTABLECER LAS VARIABLES DE INTERCAMBIO
                             buttonActual = null;
                             imgAuxCam = null;
                             imgAuxAct = null;
                             // PARA ALMACENAR EL ID DE LAS IMAGENES Y VERIFICAR AL FINAL
                             idImgAux = arrayImage[posicionActual-1];
-                            arrayImage[posicionActual-1]= arrayImage[0];//SE ALAMACENA EL ID DE LA IMAGEN, LUEGO SE UTILIZA PARA VERIFICAR GANADOR
+                            arrayImage[posicionActual-1]= arrayImage[0];        //SE ALAMACENA EL ID DE LA IMAGEN, LUEGO SE UTILIZA PARA VERIFICAR GANADOR
                             arrayImage[0]=idImgAux;
                             //IDIMAGENES
                             posicionActual = 0;
@@ -407,6 +407,7 @@ public class Juego extends AppCompatActivity {
 
     /**
      * ARMADO DE ARRAY CON IDS DE IMAGENES PARA SABER CUANDO SE TERMINA EL JUEGO
+     * LAS IMAGENES DEBEN TENER ESTAS POSICIONES PARA QUE SEA UN JUEGO GANADOR
      */
     public void arrayGanador(){
         if(tipo.toString().equals("marioparte")){

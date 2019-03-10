@@ -34,9 +34,9 @@ public class Login extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        this.nombre = (EditText) findViewById(R.id.txtNombre);
-        this.contrasenia = (EditText) findViewById(R.id.txtContraseña);
-        this.btn1 = (Button) findViewById(R.id.btnIngreso);
+        this.nombre = (EditText) findViewById(R.id.txtNombre);          //LIGAR TEXTFIELD CON UNA VARIABLE
+        this.contrasenia = (EditText) findViewById(R.id.txtContraseña); //LIGAR TEXTFIELD CON UNA VARIABLE
+        this.btn1 = (Button) findViewById(R.id.btnIngreso);             //LIGAR BOTON CON UNA VARIABLE
         btn1.setOnClickListener(new  View.OnClickListener(){
             public void onClick(View v){
                 verificarUsuario();
@@ -44,24 +44,27 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    /**
+    *   SE VERIFICA SI EL USUARIO EXISTE Y SE LE PERMITE ACCEDER AL JUEGO
+    */
     public void verificarUsuario(){
 
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1); //CONECCION A LA BD
         SQLiteDatabase db= conn.getWritableDatabase();
         String nombres = nombre.getText().toString();
         String contraseniaString = contrasenia.getText().toString();
 
+        //CONSULTAMOS A LA BASE DE DATOS, VERIFICANDO EL NOMBRE DEL USUARIO Y SU CONTRASEÑA
         Cursor fila = db.rawQuery("select nombre from usuario where nombre='"+nombres+"' and contrasenia='"+contraseniaString+"'",null);
 
-        if(fila.moveToFirst()){
+        if(fila.moveToFirst()){//   NOS MOVEMOS AL PRIMER REGISTRO
             Toast.makeText(this,"Correcto!", Toast.LENGTH_SHORT).show();
             db.close();
             Intent toys;
-            toys = new Intent(Login.this , Menu.class);
-            toys.putExtra("nom",nombres);
-            //toys.putExtra("tipo",1);
+            toys = new Intent(Login.this , Menu.class);//REEDIRECCION A LA PANTALLA DE MENU PARA LA SELECCION DE JUEGO
+            toys.putExtra("nom",nombres);//ENVIAMOS NOMBRE PARA LUEGO VERIFICAR EL GUARDADO DE PUNTOS
             startActivity(toys);
-        }else{
+        }else{//NO EXISTE EL USUARIO O LA CONTRASEÑA ES INCORRECTA
             Toast.makeText(this,"Datos Incorrectos!", Toast.LENGTH_SHORT).show();
             db.close();
         }

@@ -26,7 +26,9 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /**
+         * LIGAR TEXT/BOTONES CON VARIABLES
+         */
         campoNombre= (EditText) findViewById(R.id.editTextUsuario);
         campoContrasenia= (EditText) findViewById(R.id.editTextContraseña);
         but1 = (Button) findViewById(R.id.buttonRegistro);
@@ -39,30 +41,31 @@ public class Registro extends AppCompatActivity {
     }
 
     public void Onclick(View view ){
-        registrarUsuario();
+        registrarUsuario();// SE REGISTRA EL USUARIO
     }
 
+    /**
+     * SE PROCEDE A REGISTRAR AL USUARIO EN LA BASE DE DATOS CON UN NOMBRE Y CONTRASEÑA
+     */
     private void registrarUsuario() {
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
-        SQLiteDatabase db= conn.getWritableDatabase();
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);//CONECTAR A LA BASE DE DATOS
+        SQLiteDatabase db= conn.getWritableDatabase();// OBTENER BD
         String nombre = campoNombre.getText().toString();
         String contrasenia = campoContrasenia.getText().toString();
 
 
-        ContentValues values= new ContentValues();
-        //values.put(Utilidades.CAMPO_ID,"1");//campoId.getText().toString());
+        ContentValues values= new ContentValues();// SE ARMA UN REGISTRO CON LOS VALORES DE USUARIO NOMBRE Y CONTRASEÑA
         values.put(Utilidades.getCampoNombre(),nombre);
         values.put(Utilidades.getCampoContraseña(),contrasenia);
-        /*values.put(Utilidades.getCampoPuntaje(),0);*/
 
-        Long idResultante=db.insert("usuario",null, values);
+        Long idResultante=db.insert("usuario",null, values);// SE INSERTA EL REGISTRO
         Toast.makeText(this,"Usuario Registrado Correctamente", Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getApplicationContext(),"Id Registro:"+idResultante,Toast.LENGTH_SHORT).show();
-        //Long idResultante=db.insert(Utilidades.TABLA_USUARIO, Utilidades.CAMPO_ID,values);
-        //Toast.makeText(getApplicationContext(),"Id Registro:"+idResultante,Toast.LENGTH_SHORT).show();
-        db.close();
+        db.close();//CIERRE DE BASE DE DATOS
     }
 
+    /**
+     * SE VERIFICA QUE EL USUARIO NO EXISTA, PARA EVITAR DUPLICADOS
+     */
     public void verificarUsuario(){
 
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
