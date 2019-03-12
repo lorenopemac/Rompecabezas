@@ -28,8 +28,8 @@ public class Juego extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
         Bundle extras = getIntent().getExtras();
-        tipo = extras.getString("tipo");
-        username= extras.getString("nom");
+        tipo = extras.getString("tipo");                        // OBTENR EL TIPO DE JUEGO MARIO-PALOMA
+        username= extras.getString("nom");                      // OBTENER EL NOMBRE QUE LUEGO SE USA PARA ALMACENAR LOS PUNTOS
         //Toast.makeText(getApplicationContext(),"! "+extrasValue,Toast.LENGTH_SHORT).show();
         inicio();// METODO PRINCIPAL
     }
@@ -57,7 +57,7 @@ public class Juego extends AppCompatActivity {
 
             fila.moveToFirst();// MOVERSE AL PRIMER PUNTERO
 
-            if (fila.getInt(0)>this.turnos || fila.getInt(0)==0){
+            if (fila.getInt(0)>this.turnos || fila.getInt(0)==0){// SI LO HIZO EN MENOS TURNOS QUE ANTES
                 // SI LOGRO GANAR CON UNA MENOR CANTIDAD DE PUNTOS
                 if(tipo.toString().equals("marioparte")){// SI SE ESTA JUGANDO MARIO
                     db.execSQL("update usuario set puntosM= "+this.turnos+" WHERE nombre ='"+username+"'");// ACTUALIZO LA PUNTUACION DE MARIO
@@ -87,7 +87,7 @@ public class Juego extends AppCompatActivity {
         int k = 0;
 
         while(termina && k<9){
-            if(arrayImageGanador[k] != arrayImage[k]){//la imagen no esta en su lugar
+            if(arrayImageGanador[k] != arrayImage[k]){//LA IMAGEN NO ESTA EN EL LUGAR QUE DEBERIA
                 termina = false;
             }
             k++;
@@ -109,7 +109,7 @@ public class Juego extends AppCompatActivity {
             arrayGanador();//SE ESTABLECEN LAS POSICIONES QUE DEBE TENER EL JUEGO PARA GANAR
             turnos=0;//INICIA CON 0 TURNOS JUGADOS
             setContentView(R.layout.activity_juego);
-            String buttonID = "",imagenID="";
+            String buttonID = "",imagenID="";   //VARIABLE AUXILIAR PARA DEFINIR CADA IMAGEN DE LOS BOTONES
             int resID;
 
             /*
@@ -118,14 +118,13 @@ public class Juego extends AppCompatActivity {
             for(int i=1; i<10;i++){
                 //RECUPERACION DE LOS BOTONES
                 buttonID = "b" + i;
-                resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-                arrayBotones[i-1]=(Button) findViewById(resID);
+                resID = getResources().getIdentifier(buttonID, "id", getPackageName());//ID DE CADA BOTON
+                arrayBotones[i-1]=(Button) findViewById(resID);     //AGREGAMOS EL BOTON AL ARREGLO DE BOTONES
                 //ESTABLECER IMAGENES
-                imagenID=tipo+i;
-                resID = getResources().getIdentifier(imagenID, "drawable", getPackageName());
+                imagenID=tipo+i;        //TIPO PALOMA O MARIO
+                resID = getResources().getIdentifier(imagenID, "drawable", getPackageName());   //ID DE LA IMAGEN
                 arrayImage[i-1]=resID; // guardado de los ids de las imagenes para la verificacion del ganador
-                //LIGAR IMAGENES CON LOS BOTONES
-                arrayBotones[i-1].setBackgroundResource(resID);
+                arrayBotones[i-1].setBackgroundResource(resID);     //LIGAR IMAGENES CON LOS BOTONES
             }
 
             arrayBotones[0].setOnClickListener(new View.OnClickListener() {     // SI SE PRESIONA EL BOTON EN LA POSICION 1

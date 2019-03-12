@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1); //CONEXION A LA BD
         spinnerctrl = (Spinner) findViewById(R.id.spinner1);// LIGAR DISEÑO CON VARIABLE
-        spinnerctrl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//EVENTO
+        spinnerctrl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {    //EVENTO DE SELECCION DE UN IDIOMA
 
             public void onItemSelected(AdapterView<?> parent, View view,int pos, long id) {
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(sound.isPlaying()){// SI SE ESTA EN REPRODUCCION
+                if(sound.isPlaying()){              // SI SE ESTA EN REPRODUCCION
                     sound.pause();
                     bts.setBackgroundResource(R.drawable.sin_sonido2);
                     Toast.makeText(MainActivity.this,"Pausar",Toast.LENGTH_SHORT).show();
@@ -104,12 +104,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     public void cambiarIdioma(String lenguaje) {
-
         unLocale = new Locale(lenguaje);                //VARIABLE DE REGIONES
         Resources res = getResources();                 //OBTENER RECURSOS
         DisplayMetrics dm = res.getDisplayMetrics();    //OBTENER PROPIEDADES DE LA PANTALLA

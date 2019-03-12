@@ -74,12 +74,12 @@ public class Registro extends AppCompatActivity {
 
         Cursor fila = db.rawQuery("select nombre from usuario where nombre='"+nombres+"'",null);
 
-       if(fila.moveToFirst()){
+       if(fila.moveToFirst()){  //SI TIENE UN REGISTRO; ENTONCES EXISTE EL USUARIO
             Toast.makeText(this,"El usuario ya existe!", Toast.LENGTH_SHORT).show();
-            db.close();
         }else{
             registrarUsuario();
         }
+        db.close();
     }
 
 }

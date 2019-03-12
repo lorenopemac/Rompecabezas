@@ -25,43 +25,43 @@ public class rankings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rankings);
-        conn = new ConexionSQLiteHelper(getApplicationContext(),"bdU",null,1);
-
+        conn = new ConexionSQLiteHelper(getApplicationContext(),"bdU",null,1);// CONEXION DE LA BD
+        //OBTENER LISTAS DE LA VISTA
         listaDBUsers = (ListView) findViewById(R.id.listaUsers);
         listaDBPointM = (ListView) findViewById(R.id.listaPoint);
         listaDBPointP = (ListView) findViewById(R.id.listaPoint2);
 
-        ConsultarLista();
+        ConsultarLista();// OBTENER LOS USUARIOS DE LA BASE DE DATOS
 
-        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoUsers);
-        ArrayAdapter adaptador2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPointM);
-        ArrayAdapter adaptador3 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPointP);
+        ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoUsers);//NOMBRE USUARIO
+        ArrayAdapter adaptador2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPointM);//PUNTOS DE MARIO
+        ArrayAdapter adaptador3 = new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInfoPointP);//PUNTOS DE PALOMA
 
-        listaDBUsers.setAdapter(adaptador);
-        listaDBPointM.setAdapter(adaptador2);
-        listaDBPointP.setAdapter(adaptador3);
+        listaDBUsers.setAdapter(adaptador);//LIGAR DATOS CON LAS LISTAS
+        listaDBPointM.setAdapter(adaptador2);//LIGAR DATOS CON LAS LISTAS
+        listaDBPointP.setAdapter(adaptador3);//LIGAR DATOS CON LAS LISTAS
 
 
     }
 
     private void ConsultarLista() {
-        SQLiteDatabase db = conn.getReadableDatabase();
+        SQLiteDatabase db = conn.getReadableDatabase();//BD PARA LECTURA
 
         usuario user =null;
-        listaUsers = new ArrayList<usuario>();
+        listaUsers = new ArrayList<usuario>();      //LISTA DE LOS USUARIOS
 
-        Cursor cursor= db.rawQuery("SELECT * FROM " + Utilidades.getTablaUsuario(), null);
+        Cursor cursor= db.rawQuery("SELECT * FROM " + Utilidades.getTablaUsuario(), null);// OBTENER TODOS LOS USUARIOS
 
         while(cursor.moveToNext()){
-            user = new usuario();
-            user.setNombre(cursor.getString(1));
-            user.setPuntosM(cursor.getInt(4));
-            user.setPuntosP(cursor.getInt(5));
+            user = new usuario();                           //INICIALIZAR VARIABLE
+            user.setNombre(cursor.getString(1)); //OBTENER EL NOMBRE
+            user.setPuntosM(cursor.getInt(4));  //OBTENER LOS PUNTOS DEL JUEGO MARIO
+            user.setPuntosP(cursor.getInt(5));  //OBTENER LOS PUNTOS DEL JUEGO PALOMA
 
-            listaUsers.add(user);
+            listaUsers.add(user);                           //AGREGAR A LA LISTA DE USUARIOS
 
         }
-        ordenarLista();
+        ordenarLista();     //ORDENAR LA LISTA DEPENDIENDO DE LOS PUNTAJES EN LOS DOS JUEGOS
         obtenerLista();
     }
 
@@ -75,10 +75,13 @@ public class rankings extends AppCompatActivity {
             for (int j=i;j<listaUsers.size();j++){
 
                 if(listaUsers.get(i).getPuntosM()+listaUsers.get(i).getPuntosP()>listaUsers.get(j).getPuntosM()+listaUsers.get(j).getPuntosP()){
+                    /**
+                     * SE ORDENA LA LISTA DE LOS USUARIOS UTILIZANDO UN ARRAY
+                     */
                     String name=listaUsers.get(i).getNombre();
                     String pass = listaUsers.get(i).getContraseña();
-                    int point = listaUsers.get(i).getPuntosM();
-                    int point2 = listaUsers.get(i).getPuntosP();
+                    int point = listaUsers.get(i).getPuntosM();         //PUNTOS DE MARIO
+                    int point2 = listaUsers.get(i).getPuntosP();        //PUNTOS DE PALOMA
 
                     listaUsers.get(i).setNombre(listaUsers.get(j).getNombre());
                     listaUsers.get(i).setContraseña(listaUsers.get(j).getContraseña());
@@ -95,7 +98,9 @@ public class rankings extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * ASIGNAR LOS REGISTROS A LAS LISTAS QUE TENGAN LOS DOS PUNTAJES,OSEA JUGARON LOS DOS JUEGOS
+     */
     private void obtenerLista() {
         listaInfoUsers=new ArrayList<String>();
         listaInfoPointM = new ArrayList<Integer>();
