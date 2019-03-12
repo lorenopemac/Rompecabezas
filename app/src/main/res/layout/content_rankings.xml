@@ -27,10 +27,10 @@
 
         <TextView
             android:id="@+id/textUser"
-            android:layout_width="127dp"
+            android:layout_width="114dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="USUARIO"
+            android:text="USER"
             android:textSize="25dp" />
 
         <ListView
@@ -47,7 +47,7 @@
             android:layout_marginLeft="7dp"
             android:layout_toRightOf="@+id/textUser"
             android:gravity="center"
-            android:text="PUNTAJE MARIO"
+            android:text="PUNTOS MARIO"
             android:textSize="15dp" />
 
         <ListView
@@ -58,13 +58,14 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@+id/listaUsers" />
+
         <TextView
             android:id="@+id/textPoint2"
             android:layout_width="121dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/textPoint"
             android:gravity="center"
-            android:text="PUNTAJE PALOMA"
+            android:text=" PALOMA"
             android:textSize="15dp" />
 
         <ListView

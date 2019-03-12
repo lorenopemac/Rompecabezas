@@ -20,23 +20,23 @@ import entidades.ConexionSQLiteHelper;
 public class MainActivity extends AppCompatActivity {
     Spinner spinnerctrl;
     Button btn;
-    Locale myLocale;
+    Locale unLocale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1);
-        spinnerctrl = (Spinner) findViewById(R.id.spinner1);
-        spinnerctrl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bdU",null,1); //CONEXION A LA BD
+        spinnerctrl = (Spinner) findViewById(R.id.spinner1);// LIGAR DISEÑO CON VARIABLE
+        spinnerctrl.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//EVENTO
 
             public void onItemSelected(AdapterView<?> parent, View view,int pos, long id) {
 
                 if (pos == 1) {
                     Toast.makeText(parent.getContext(),"You have selected Español", Toast.LENGTH_SHORT).show();
-                    setLocale("sp");
+                    cambiarIdioma("sp");
                 } else if (pos == 2) {
                     Toast.makeText(parent.getContext(),"You have selected English", Toast.LENGTH_SHORT).show();
-                    setLocale("en");
+                    cambiarIdioma("en");
                 }
             }
 
@@ -92,15 +92,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(sound.isPlaying()){
+                if(sound.isPlaying()){// SI SE ESTA EN REPRODUCCION
                     sound.pause();
                     bts.setBackgroundResource(R.drawable.sin_sonido2);
-                    Toast.makeText(MainActivity.this,"Pause",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Pausar",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     sound.start();
                     bts.setBackgroundResource(R.drawable.sonido3);
-                    Toast.makeText(MainActivity.this,"Play",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Reproducir",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -108,17 +108,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setLocale(String lenguaje) {
+    public void cambiarIdioma(String lenguaje) {
 
-        myLocale = new Locale(lenguaje);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
+        unLocale = new Locale(lenguaje);                //VARIABLE DE REGIONES
+        Resources res = getResources();                 //OBTENER RECURSOS
+        DisplayMetrics dm = res.getDisplayMetrics();    //OBTENER PROPIEDADES DE LA PANTALLA
+        Configuration conf = res.getConfiguration();    //CONFIGURACION
+        conf.locale = unLocale;
         res.updateConfiguration(conf, dm);
         Intent refresh = new Intent(this, MainActivity.class);
-        startActivity(refresh);
+        startActivity(refresh);                        //REFRESCAR PANTALLA
     }
+
 
 
 
